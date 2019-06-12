@@ -20,36 +20,8 @@ static int childFunc()
     sethostname("A-New-bash", 11);                                  // set host name
     unshare(CLONE_NEWNET);                                          // NET isolated | use in clone()
 
-    if (mount("proc", "/proc", "proc", 0, NULL) != 0)
-    {
-        perror("proc");
-    }
-    if (mount("sysfs", "/sys", "sysfs", 0, NULL) != 0)
-    {
-        perror("sys");
-    }
-    if (mount("none", "/tmp", "tmpfs", 0, NULL) != 0)
-    {
-        perror("tmp");
-    }
-    if (mount("udev", "/dev", "devtmpfs", 0, NULL) != 0)
-    {
-        perror("dev");
-    }
-    if (mount("devpts", "/dev/pts", "devpts", 0, NULL) != 0)
-    {
-        perror("dev/pts");
-    }
-    if (mount("shm", "/dev/shm", "tmpfs", 0, NULL) != 0)
-    {
-        perror("dev/shm");
-    }
-    if (mount("tmpfs", "/run", "tmpfs", 0, NULL) != 0)
-    {
-        perror("run");
-    }
-    // chdir("/rootfs");  //change work dir
-    // chroot("/rootfs"); //change root dir
+    system("mount -t proc proc /proc"); // a instance
+    
     // system("sudo ls -l /proc/$$/ns");	// check PID isolated
     system("echo \"\nChild--NET-LINK...:\"");
     system("ip link"); // check NET isolated
