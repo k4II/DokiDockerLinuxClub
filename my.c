@@ -18,9 +18,10 @@ static int childFunc()
 {
     printf("Insider the A-New-bash...\nPID:%ld\n", (long)getpid()); // 查看子进程的PID，其输出子进程的 pid 为 1
     sethostname("A-New-bash", 11);                                  // set host name
-    unshare(CLONE_NEWNET);                                          // NET isolated | use in clone()
-
+                                        // NET isolated | use in clone()
     system("mount -t proc proc /proc"); // a instance
+    unshare(CLONE_NEWNET);  // 也可以写在clone()里面
+    unshare(CLONE_NEWUSER); // root权限才能mount, 所以在mount之后用户隔离
     
     // system("sudo ls -l /proc/$$/ns");	// check PID isolated
     system("echo \"\nChild--NET-LINK...:\"");
@@ -39,8 +40,8 @@ int main()
     system("ipcmk -Q"); // create queue ID, global = 0
     system("ipcs -q");
     pid_t child_pid = clone(childFunc, childStack + STACK_SIZE,
-                            CLONE_NEWUSER | CLONE_NEWNS | CLONE_NEWUTS | CLONE_NEWPID | CLONE_NEWIPC | SIGCHLD, NULL); // 传尾指针，因为栈是反着的
-    // use CLONE_NEWNS, CLONE_NEWIPC, CLONE_NEWNET, CLONE_NEWUTS, CLONE_PID : __Namespace__
+                            CLONE_NEWNS | CLONE_NEWUTS | CLONE_NEWPID | CLONE_NEWIPC | SIGCHLD, NULL); // 传尾指针，因为栈是反着的
+    // use CLONE_NEWNS, CLONE_NEWIPC, CLONE_NEWNET, CLONE_NEWUTS, CLONE_PID, CLONE_NEWUSER : __Namespace__
     if (child_pid == -1)
     {
         perror("clone");
@@ -61,6 +62,7 @@ int main()
         perror("waitpid");
         exit(EXIT_FAILURE);
     }
+    // system("mount -t proc proc /proc");  // 重新挂载到主机上
     printf("Child has terminated\n");
     return 0;
 }
