@@ -1,11 +1,11 @@
 # Test
 SRE
 ...Namespace--Linux
+C语言
 
-![img](https://images2018.cnblogs.com/blog/952033/201807/952033-20180725130447798-998138444.png)
+运用Namespace进行Linux的系统隔离。使用clone（）或者unshare（），创建Namespace，在子进程中进行隔离。
+我在这里用到了
 
-运用Namespace进行Linux的系统隔离。使用clone()或者unshare()，创建Namespace，在子进程中进行隔离。
-我在这里用到了 
 
 - CLONE_NEWNS		-- Mount Namespace 文件系统隔离
   使用挂载mount，将“/”中的目录与子进程进行共享
