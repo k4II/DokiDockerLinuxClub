@@ -18,9 +18,9 @@ static int childFunc()
 {
     printf("Insider the A-New-bash...\nPID:%ld\n", (long)getpid()); // 查看子进程的PID，其输出子进程的 pid 为 1
     sethostname("A-New-bash", 11);                                  // set host name
-                                        // NET isolated | use in clone()
+                                        
     system("mount -t proc proc /proc"); // a instance
-    unshare(CLONE_NEWNET);  // 也可以写在clone()里面
+    unshare(CLONE_NEWNET);  // NET isolated也可以写在clone()里面
     unshare(CLONE_NEWUSER); // root权限才能mount, 所以在mount之后用户隔离
     
     // system("sudo ls -l /proc/$$/ns");	// check PID isolated
