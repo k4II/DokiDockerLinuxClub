@@ -1,52 +1,13 @@
-##                                 Doki Docker Linux Club !
+###         红岩期末考核
 
-![](./img/ddlc.jpg)
+完成了进程隔离，IPC隔离，用户隔离，网络隔离，端口映射。
 
+编译后用"sudo ./zeng"运行
+可在容器内用"python -m SimpleHTTPServer"运行简单的http服务，在容器外访问宿主机的8088端口即可访问到容器的8000端口"curl -I 127.0.0.1:8088"
 
+体会：文件系统隔离杀我...想过是用kaii给的rootfs做个类似docker的效果，可除了"mount -t proc proc /proc"可以成功其他的都mount不动....更换目录也失败..
 
-### 目标 ：
-
-基于 Linux namespace 机制实现以下功能
-
-* 实现 文件系统隔离
-
-  见`/example`
-
-* 实现进程隔离
-
-* 实现用户隔离
-
-* 实现网络隔离
-
-  ​	
-
-
-
-
-
-### 参考资料 :
-
-> <http://man7.org/linux/man-pages/man7/namespaces.7.html>
->
-> <http://man7.org/linux/man-pages/man2/clone.2.html>
-
-
-
-### 注意：	
-
-操作系统 ： Unix like 
-
-语言 ： 不限	 
-
-附件 : assets/rootfs.tar 是一个简单的文件系统
-
-#### 加分项
-
-* 代码可读性
-* 文档
-* 提交时间
-* 完成程度
-* 拓展功能 ，如网络隔离后的 端口映射，IPC 隔离 ，容器操作等
+收获：做端口映射的时候了解了一点linux虚拟网卡的知识，还有namespace牛逼┗|｀O′|┛ 嗷~~
 
 
 
