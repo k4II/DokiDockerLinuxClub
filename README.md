@@ -76,8 +76,8 @@
 
 ## 六、容器截图
 
-![bandicam 2019-06-13 23-27-51-217](C:\Users\wrtan\Desktop\img\bandicam 2019-06-13 23-27-51-217.png)
+![bandicam 2019-06-13 23-27-51-217](./img/bandicam 2019-06-13 23-27-51-217.png)
 
-![bandicam 2019-06-13 23-28-16-286](C:\Users\wrtan\Desktop\img\bandicam 2019-06-13 23-28-16-286.png)
+![bandicam 2019-06-13 23-28-16-286](./img/bandicam 2019-06-13 23-28-16-286.png)
 
-![bandicam 2019-06-13 23-28-57-893](C:\Users\wrtan\Desktop\img\bandicam 2019-06-13 23-28-57-893.png)
+![bandicam 2019-06-13 23-28-57-893](./img/bandicam 2019-06-13 23-28-57-893.png)
