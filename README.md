@@ -43,6 +43,7 @@
 ## 四、致谢
 
 超链接不分先后！
+不过我推荐阅读前5篇文章。
 
 [酷壳：DOCKER基础技术：LINUX NAMESPACE（上）](https://coolshell.cn/articles/17010.html)
 
@@ -64,6 +65,8 @@
 
 [Infoq：Docker 背后的内核知识——Namespace 资源隔离](https://www.infoq.cn/article/docker-kernel-knowledge-namespace-resource-isolation)
 
+还有一些博客文章，但是上面的文章基本上已经可以解决问题了，就不再发了！
+
 ## 五、感想
 
 首先，感谢k4ii在这一年里对我的帮助，我需要帮助的时候去找k4ii，他总能给我一些解决方案。
@@ -75,6 +78,8 @@
 上面的那些链接指向的文章，我基本上都拜读了，酷壳上面有现成的代码不假，可就像我给k4ii说的那样，不留后路，干他娘的！我希望自己写的更好，哪怕不行，我也要比别人多明白一点儿。
 
 （臭美）我努力的样子，其实还不坏~
+
+看到大家写得这么好，我有点儿慌啊~
 
 ## 六、容器截图
 
