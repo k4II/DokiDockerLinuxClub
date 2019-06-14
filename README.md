@@ -1,60 +1,39 @@
-##                                 Doki Docker Linux Club !
+README.md
 
-![](./img/ddlc.jpg)
+##### 使用方法
 
+依次运行/源代码编译
 
+```bash
+sudo bash ./init.sh
+sudo ./ns-demo	#gcc main.c -o ..
+```
 
-### 目标 ：
+##### 备注：
 
-基于 Linux namespace 机制实现以下功能
+`ubuntu18.04LTS`
 
-* 实现 文件系统隔离
+默认使用 rootfs/bin/sh  添加bash支持需运行init.sh
 
-  见`/example`
+`<sys/capability.h> --> install libcap-devel`
 
-* 实现进程隔离
+##### 完成功能： 
 
-* 实现用户隔离
+UTS,PID,MOUNT,USER,NET.
 
-* 实现网络隔离
+##### 测试：
 
-  ​	
+容器内运行C编写的SimpleHTTPServer,容器目录`/SERVER/HTTPSVR`
 
+默认宿主机访问
+容器lxcveth1:8080(169.254.1.2:8080)
 
+> 从源代码编译HTTPSVR
+> ```
+> gcc ./httpsvr.c --static -o HTTPSVR
+> ```
 
+##### 已知问题：
 
-
-### 参考资料 :
-
-> <http://man7.org/linux/man-pages/man7/namespaces.7.html>
->
-> <http://man7.org/linux/man-pages/man2/clone.2.html>
-
-
-
-### 注意：	
-
-操作系统 ： Unix like 
-
-语言 ： 不限	 
-
-附件 : assets/rootfs.tar 是一个简单的文件系统
-
-#### 加分项
-
-* 代码可读性
-* 文档
-* 提交时间
-* 完成程度
-* 拓展功能 ，如网络隔离后的 端口映射，IPC 隔离 ，容器操作等
-
-
-
-
-
-
-
-
-
-
-
+1. CLONE_NEWNET创建lxcveth0/1需要su.但与以普通用户运行容器相悖,造成parent root:container root的映射.权限过高
+2. 尝试`sed ` 编辑`/proc/$$/uid,gid` 疑受`CAP_SETUID` 限制,改用C fileIO读写
