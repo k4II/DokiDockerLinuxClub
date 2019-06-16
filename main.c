@@ -141,7 +141,22 @@ void parent_netset(int child_pid)
     system(cmd);
     system("ip link set veth0 up");
     system("ip addr add 169.254.1.1/30 dev veth0");
-    free(cmd);
+
+    //为容器添加外网支持
+    asprintf(&cmd,"iptables -t filter -A FORWARD -i %d ! -o %d -j ACCEPT",child_pid,child_pid);
+    system(cmd);
+    asprintf(&cmd,"iptables -t filter -A FORWARD -i %d -o %d -j ACCEPT",child_pid,child_pid);
+    system(cmd);
+    asprintf(&cmd,"iptables -t filter -A FORWARD -o %d -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT",child_pid);
+    system(cmd);
+    asprintf(&cmd,"iptables -t nat -A POSTROUTING -s 169.254.1.1/30 ! -o %d -j MASQUERADE",child_pid);
+    system(cmd);
+
+    //端口映射
+    system("iptables -t nat -A PREROUTING -p tcp -m tcp --dport 8080 -j DNAT --to-destination 169.254.1.2:8000");
+    system("iptables -t filter -A FORWARD -p tcp -m tcp --dport 8000 -j ACCEPT");
+    system("iptables -t nat -A OUTPUT -p tcp -m tcp --dport 8080 -j DNAT --to-destination 169.254.1.2:8000");
+    system("iptables -t nat -A POSTROUTING -p tcp -m tcp --dport 8000 -j MASQUERADE");
 }
 
 void set_map(char* file, int inside_id, int outside_id, int len) 
